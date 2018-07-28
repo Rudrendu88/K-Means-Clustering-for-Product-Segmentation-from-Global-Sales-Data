@@ -8,8 +8,10 @@ Dataset Description: This dataset consists of 52 weeks of data for  811 differen
 Publication: This data set was originally used in the following publications,
 
 1. Fujita, H., Ali, M., Selamat, A., Sasaki, J., Kurematsu, M. (Eds.), Trends in Applied Knowledge-Based Systems and Data Science.
-Springer. https://www.springer.com/us/book/9783319420066
+Springer. 
+https://www.springer.com/us/book/9783319420066
 
-2. https://pdfs.semanticscholar.org/a1c1/5f4594629d3a5a72e038084e6f6c370d5dd8.pdf
+2. Tan, Lau. Time Series Clustering: A Superior Alternative for Market Basket Analysis.   
+https://pdfs.semanticscholar.org/a1c1/5f4594629d3a5a72e038084e6f6c370d5dd8.pdf
 
 Data Source: https://archive.ics.uci.edu/ml/datasets/Sales_Transactions_Dataset_Weekly
