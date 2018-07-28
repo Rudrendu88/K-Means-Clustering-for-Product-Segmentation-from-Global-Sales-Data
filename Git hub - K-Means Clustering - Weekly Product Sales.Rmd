@@ -1,0 +1,88 @@
+---
+title: "K-Means Cluster Analysis on Weekly Product Sales"
+output: html_notebook
+---
+
+
+```{r}
+
+# Importing the dataset
+dataset = read.csv('Sales_Transactions_Dataset_Weekly.csv')
+dataset = dataset[1:53]
+dim(dataset)
+
+print("Number of products = ")
+print(nrow(dataset)-1)
+
+print("Number of weeks of data available for the year:")
+print(ncol(dataset)-1)
+
+str(dataset)
+
+#Checking for missing data
+d3=dataset
+for(i in 1:ncol(d3))
+   {
+    print(colnames(d3[i]))
+    print(sum(is.na(d3[i])))
+   }
+# There is no missing data
+
+# Encoding the target feature as factor
+dataset$Product_Code = factor(dataset$Product_Code)
+
+# Training Set
+training_set = dataset
+
+# Feature Scaling
+training_set = scale(dataset[-1])
+str(training_set)
+
+```
+
+```{r}
+
+# Number of Clusters
+k = 5
+
+# Using the elbow method to find the optimal number of clusters
+set.seed(123)
+wcss = vector()
+for (i in 1:k) wcss[i] = sum(kmeans(training_set, i, algorithm = "Hartigan-Wong")$withinss)
+plot(1:k,
+     wcss,
+     type = 'b',
+     main = paste('The Elbow Method'),
+     xlab = 'Number of clusters',
+     ylab = 'WCSS')
+
+# Optimal Clusters Found
+Optimal_Clusters = 3
+
+# Fitting K-Means to the dataset
+set.seed(456)
+kmeans = kmeans(x = training_set, centers = Optimal_Clusters)
+y_kmeans = kmeans$cluster
+plot(y_kmeans, 
+     ylab = "Product Clusters with similar Weekly Sales Pattern", 
+     xlab = "Product ID Numbers")
+
+hist(y_kmeans, main  = "Number of products in each cluster", xlab = "Product Cluster ID")
+```
+
+```{r}
+# Visualising the clusters
+library(cluster)
+clusplot(training_set,
+         y_kmeans,
+         lines = 0,
+         shade = TRUE,
+         color = TRUE,
+         labels = 2,
+         plotchar = FALSE,
+         span = TRUE,
+         main = paste('Clusters of Products'),
+         xlab = 'Qty of Sales',
+         ylab = 'Sales Location')
+```
+
